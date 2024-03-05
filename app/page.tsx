@@ -11,7 +11,7 @@ export default async function Page({
   searchParams,
 }: {
   params: { slug: string }
-  searchParams: { q: string}
+  searchParams: { q: string | undefined}
 }) {
   const { q } = searchParams
 
