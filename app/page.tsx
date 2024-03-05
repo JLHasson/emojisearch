@@ -11,12 +11,12 @@ export default async function Page({
   searchParams,
 }: {
   params: { slug: string }
-  searchParams: { [key: string]: string | string[] | undefined }
+  searchParams: { q: string | undefined}
 }) {
   const { q } = searchParams
 
   const results = await objective.indexes.index.search("idx_TJ6a2dVrJAmF", {
-    query: Array.isArray(q) ? q.join(' ') : q || "",
+    query: q || "",
     limit: 9,
     object_fields: "*",
   });
