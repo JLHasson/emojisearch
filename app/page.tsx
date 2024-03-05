@@ -6,11 +6,17 @@ const objective = new ObjectiveClient({
   apiKey: process.env.OBJECTIVE_API_KEY,
 });
 
-export default async function Page({ searchParams }) {
+export default async function Page({
+  params,
+  searchParams,
+}: {
+  params: { slug: string }
+  searchParams: { [key: string]: string | string[] | undefined }
+}) {
   const { q } = searchParams
 
   const results = await objective.indexes.index.search("idx_TJ6a2dVrJAmF", {
-    query: q || "",
+    query: Array.isArray(q) ? q.join(' ') : q || "",
     limit: 9,
     object_fields: "*",
   });
